@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+body{
+    display:flex;
+    min-height:100vh;
+}
+
+.search-bar{
+    width:60%;
+    height:56px;
+    display:flex;
+    align-items:center;
+    margin: 0 auto;
+    gap:12px;
+    padding:0 20px;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 2px 8px rgba(15,23,42,.5);
+}
+
+.search-bar i{
+    font-size:18px;
+    color:#64748B;
+}
+
+.search-st {
+    background:#fff;
+    border: none;
+}
+
+.btn-header:focus {
+    border: none;
+}
+
+#input_text_city{
+    flex:1;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    font-size:16px;
+    font-family:inherit;
+}
+
+#input_text_city::placeholder{
+    color:#94A3B8;
+}
+
+.search_input {
+    flex: 1;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+}
+
+aside {
+    width: 300px;
+    height: 100vh;
+    padding: 24px;
+    background: linear-gradient(
+        180deg,
+        #20314F 0%,
+        #111C31 100%
+    );
+    gap: 16px;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(
+        180deg,
+        #82BDF1 0%,
+        #D6ECFF 100%
+    )  ;
+}
+
+.nav_bar{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+main{
+    padding:40px;
+    height: 100%;
+}
+
+header {
+    padding: 12px 24px;
+    height: max-content;
+}
+
+.btn-no-po {
+    background-color: transparent;
+    font-size: 18px;
+    border: none;
+    height: 40px;
+    width: 40px;
+}
+
+.btn-aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn-no-po:hover {
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.notification_profile {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+}
+
+.aside-btn {
+    border: transparent;
+    border-radius: 12px;
+    height: 56px;
+    width: 90%;
+    background-color: #417DF4;
+    color: white;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.aside-btn:hover {
+    background-color: #4D88FA;
+}
+
+.aside-btn:active {
+    background-color: #2D6CF0;
+}
