@@ -10,6 +10,9 @@
 <body>
     <aside>
         <div class="btn-aside">
+            <button class="menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
             <button class="weather-logo">
                 <h1>Weather.</h1>
             </button>
@@ -17,7 +20,7 @@
                 <i class="fa-solid fa-house"></i>
                 <h3>Overview</h3>
             </button>
-            <button class="forecast aside-btn">
+            <button class="forecast-btn aside-btn">
                 <i class="fa-regular fa-calendar"></i>
                 <h3>Forecast</h3>
             </button>
@@ -37,6 +40,16 @@
                 <i class="fa-solid fa-gear"></i>
                 <h3>Setting</h3>
             </button>
+        </div>
+        <div class="local-city">
+            <div class="city-name">
+                <i class="fa-solid fa-location-dot"></i>
+                <p class="city">Nashik, India</p>
+            </div>
+            <div class="auto-loca">
+                <p class="auto-loca">Auto locate</p>
+                <i class="fa-solid fa-location-crosshairs"></i>
+            </div>
         </div>
     </aside>
     <div class="content">
@@ -59,7 +72,82 @@
             </div>
         </header>
         <main>
+            <div class="city-plus-type">
+                <div class="weather-current-city">
 
+                </div>
+                <div class="define-current-city">
+                    <div class="humidity define-box">
+                        <div class="logoo">
+                            <i class="fa-solid fa-droplet"></i>
+                        </div>
+                        <div class="text-humiity">
+                            <p>Humidity</p>
+                        </div>
+                    </div>
+                    <div class="wind define-box">
+                        <div class="logoo">
+                            <i class="fa-solid fa-wind"></i>
+                        </div>
+                        <div class="text-wind">
+                            <p>Wind</p>
+                        </div>
+                    </div>
+                    <div class="pressure define-box">
+                        <div class="logoo">
+                            <i class="fa-solid fa-gauge"></i>
+                        </div>
+                        <div class="text-pressure define-box">
+                            <p>Pressure</p>
+                        </div>
+                    </div>
+                    <div class="ux-index define-box">
+                        <div class="logoo">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                        <div class="text-ux-index">
+                            <p>UX Index</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="forecast-text">
+                    <h2>5-day Forecast</h2>
+                </div>
+            <div class="forecast">
+                <div class="forecast-today forecast-box">
+                    <h3>Today</h3>
+                </div>
+                <div class="forecast-tmr forecast-box">
+                    <h3>Tomorrow</h3>
+                </div>
+                <div class="forecast-three forecast-box">
+                    <h3>Wed</h3>
+                </div>
+                <div class="forecast-four forecast-box">
+                    <h3>Thu</h3>
+                </div>
+                <div class="forecast-five forecast-box">
+                    <h3>Fri</h3>
+                </div>
+            </div>
+            <div class="timing-sunriset">
+                <div class="sunrise common-downbar detail-down">
+                    <h3>Sunrise</h3>
+                </div>
+                <div class="sunset common-downbar detail-down">
+                    <h3>Sunset</h3>
+                </div>
+                <div class="visibilty common-downbar detail-down">
+                    <h3>Visibility</h3>
+                </div>
+                <div class="dew-point common-downbar detail-down">
+                    <h3>Dew Point</h3>
+                </div>
+                <div class="cloud-cover detail-down">
+                    <h3>Cloud Cover</h3>
+                </div>
+            </div>
         </main>
     </div>
 </body>
