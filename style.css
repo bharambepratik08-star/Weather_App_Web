@@ -211,7 +211,7 @@ header {
     background:rgba(255,255,255,.82);
     backdrop-filter:blur(18px);
     border-radius: 24px;
-    width: 90%;
+    width: 100%;
     height: 14%;
     display: flex;
     padding: 20px;
@@ -230,7 +230,7 @@ header {
 
 .forecast-box {
     height: 100%;
-    width: 20%;
+    flex:1;
     color: black;
     border-radius: 16px;
     display: flex;
@@ -246,7 +246,7 @@ header {
 .forecast {
     display: flex;
     justify-content: center;
-    width: 90%;
+    width: 100%;
     gap: 16px;
     margin: 20px 0px;
     height: 50%;
@@ -254,7 +254,7 @@ header {
 }
 
 .city-plus-type {
-    width: 90%;
+    width: 100%;
     display: flex;
     height: 20%;
     justify-content: center;
@@ -314,47 +314,47 @@ header {
 }
 
 
-@media screen and (max-width:1200px) and (min-width: 450px) {
-    
+@media screen and (max-width:1200px) and (min-width:761px){
 
     aside{
         width:72px;
         padding:24px 12px;
     }
 
-    .weather-logo {
-        display: none;
-    }
-
+    .weather-logo,
+    .local-city,
     .aside-btn h3{
-        display: none;
+        display:none;
     }
 
-   .aside-btn{
+    .aside-btn{
         width:52px;
         height:52px;
+        padding:0;
         border-radius:14px;
-        padding: 0;
     }
 
     .aside-btn i{
         font-size:18px;
     }
 
-    .local-city {
-        display: none;
+    .btn-aside{
+        gap:20px;
     }
 
-    .search-bar {
+    main{
+        padding:24px;
+    }
+
+    .search-bar{
         width:70%;
         max-width:520px;
-        height: 52px;
+        height:52px;
     }
 
-    .forecast {
-        min-height: 170px;
-        max-height: 450px;
-        gap: 10px;
+    .city-plus-type{
+        width:100%;
+        gap:16px;
     }
 
     .weather-current-city{
@@ -365,11 +365,144 @@ header {
         width:42%;
     }
 
-    main{
-        padding:20px;
+    .forecast{
+        width:100%;
+        gap:12px;
     }
 
-    .btn-aside{
+}
+
+@media screen and (max-width:760px){
+
+    body{
+        display:flex;
+        min-height:100vh;
+    }
+
+    aside{
+        display:none;
+    }
+
+    .content{
+        flex:1;
+        width:100%;
+        min-height:100vh;
+    }
+
+    header{
+        padding:16px;
+    }
+
+    .menu-btn{
+        display:block;
+    }
+
+    .nav_bar{
+        gap:12px;
+        align-items:center;
+    }
+
+    .search-bar{
+        width:100%;
+        height:48px;
+    }
+
+    .notification_profile{
+        gap:10px;
+        padding:0;
+    }
+
+    .btn-no-po{
+        width:40px;
+        height:40px;
+    }
+
+    main{
+        padding:16px;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
         gap:20px;
+    }
+
+    .city-plus-type{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        gap:16px;
+    }
+
+    .weather-current-city,
+    .define-current-city{
+        width:100%;
+    }
+
+    .define-current-city{
+        padding:16px;
+    }
+
+    .define-box{
+        padding:12px;
+    }
+
+    .forecast-text{
+        width:100%;
+        margin:0;
+    }
+
+    .forecast{
+        width:100%;
+        display:flex;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        overflow-y:hidden;
+        gap:12px;
+
+        justify-content:flex-start;
+
+        scrollbar-width:none;
+        -ms-overflow-style:none;
+    }
+
+    .forecast::-webkit-scrollbar{
+        display:none;
+    }
+
+    .forecast-box{
+        flex:0 0 120px;
+        min-height:170px;
+        border-radius:16px;
+    }
+
+    .forecast-box:first-child{
+        margin-left:16px;
+    }
+
+    .forecast-box:last-child{
+        margin-right:16px;
+    }
+
+    .timing-sunriset{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+
+        background:transparent;
+        box-shadow:none;
+        padding:0;
+        height:auto;
+    }
+
+    .detail-down{
+        width:100%;
+        padding:18px;
+        background:white;
+        border-radius:16px;
+        justify-content:space-between;
+    }
+
+    .common-downbar{
+        border:none;
     }
 }
