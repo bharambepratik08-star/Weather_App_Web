@@ -1,17 +1,59 @@
-let city = "Nashik";
+function getWeather(lat, lon) {
 
-let url = `https://api.open-meteo.com/v1/forecast?latitude=19.999998&longitude=73.8&daily=weather_code,sunrise,sunset,sunshine_duration,uv_index_max,temperature_2m_max,apparent_temperature_max,temperature_2m_min,apparent_temperature_min,daylight_duration,uv_index_clear_sky_max,rain_sum,showers_sum,snowfall_sum,precipitation_sum,precipitation_probability_max,et0_fao_evapotranspiration,wind_direction_10m_dominant,wind_gusts_10m_max,wind_speed_10m_max,shortwave_radiation_sum&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,weather_code,pressure_msl,surface_pressure,cloud_cover,visibility,wind_speed_10m,wind_gusts_10m,temperature_80m,snowfall&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m`;
+    let url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,sunrise,sunset,sunshine_duration,uv_index_max,temperature_2m_max,apparent_temperature_max,temperature_2m_min,apparent_temperature_min,daylight_duration,uv_index_clear_sky_max,rain_sum,showers_sum,snowfall_sum,precipitation_sum,precipitation_probability_max,et0_fao_evapotranspiration,wind_direction_10m_dominant,wind_gusts_10m_max,wind_speed_10m_max,shortwave_radiation_sum&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,weather_code,pressure_msl,surface_pressure,cloud_cover,visibility,wind_speed_10m,wind_gusts_10m,temperature_80m,snowfall&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&timezone=auto`;
 
-let api = fetch(url);
+    fetch(url)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
 
+            const extracted = weather_extract(data);
 
-api.then(function(response){
-    return response.json();
-}).then(function (data){
-    const extracted = weather_extract(data);
-    output_data(extracted);
-    forecast_card_edit (data)
-})
+            output_data(extracted);
+
+            forecast_card_edit(data);
+
+            const deta = auto_data_text(data);
+
+            auto_text_up(deta);
+        });
+
+}
+
+const searchBtn = document.querySelector(".search-st");
+
+searchBtn.addEventListener("click", order);
+
+function order(){
+
+    const city = search_bar.value.trim();
+
+    if(city === ""){
+        return;
+    }
+
+    const city_url = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=beb3da527e6c5a7af2ba1a7e725c78cd`;
+
+    fetch(city_url)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+
+            if(data.length === 0){
+                alert("City not found");
+                return;
+            }
+
+            const lat = data[0].lat;
+            const lon = data[0].lon;
+
+            getWeather(lat, lon);
+
+        });
+
+}
 
 const search_bar = document.querySelector('#input_text_city');
 const humidity_text = document.querySelector('.humidity-js');
@@ -70,15 +112,15 @@ function weatherIcon(code) {
         case 0:
             return "svg/sun.svg";
         case 1:
-            return "🌤";
+            return "svg/less-cloud.svg";
         case 2:
-            return "⛅";
+            return "svg/large-cloud.svg";
         case 3:
-            return "☁️";
+            return "svg/clouds.svg";
         case 61:
-            return "🌧";
+            return "svg/rain.svg";
         default:
-            return "🌥";
+            return "svg/thunder.svg";
     }
 } 
 
@@ -112,4 +154,19 @@ function forecast_card_edit(value) {
             <p>${value.daily.temperature_2m_min[index]}°C</p>
         `;
     });
+}
+
+function auto_data_text (edit) {
+    return {
+        temp: edit.daily.temperature_2m_max[0],
+        weatherCode: edit.daily.weather_code[0],
+    }
+}
+
+function auto_text_up (data) {
+    const text_edit = document.querySelector('.weather-current-city');
+    text_edit.innerHTML = `
+        <img class="logo-up" src=${weatherIcon(data.weatherCode)}>
+        <h1 class-"temp">${data.temp} °C</h1>
+    `
 }

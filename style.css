@@ -300,7 +300,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 24px;
+    padding: 30px;
     gap: 20px;
     flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
@@ -331,6 +331,11 @@ header {
     gap: 25px;
 }
 
+.logo-up {
+    height: 150px;
+    width: 150px;
+}
+
 .menu-btn {
     background-color: transparent;
     height: 30px;
@@ -338,6 +343,13 @@ header {
     border: none;
     color: white;
     display: none;
+}
+
+.weather-current-city {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
 }
 
 .menu-btn:hover {
