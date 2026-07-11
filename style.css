@@ -296,6 +296,41 @@ header {
     border-top:1px solid #E2E8F0;
 }
 
+.forecast-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    gap: 20px;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+
+.detail-down {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.img_forecast_box_logo {
+    height: 100px;
+    width: 100px;
+}
+
+.define-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    padding: auto;
+    gap: 25px;
+}
+
 .menu-btn {
     background-color: transparent;
     height: 30px;
