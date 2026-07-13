@@ -16,6 +16,8 @@ function getWeather(lat, lon) {
 
             forecast_card_edit(data);
 
+            forecast_main_card_edit(data);
+
             const deta = auto_data_text(data);
 
             auto_text_up(deta);
