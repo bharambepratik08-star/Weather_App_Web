@@ -18,6 +18,9 @@ function getWeather(lat, lon) {
 
             auto_text_up(deta);
 
+            const data_print = hourly_data(data);
+
+            hourly_data_print(data_print);
         });
 
 }
@@ -59,6 +62,7 @@ function order(){
         });
 
         update_city(city);
+        
 
 }
 
@@ -66,7 +70,9 @@ function enterfun (event) {
 
     if (event.key === "Enter") {
         order();
+
         search_bar.value = "";
+        search_bar.placeholder = "Search another city...";
     }
 
     
@@ -165,6 +171,8 @@ function forecast_card_edit(value) {
                 <img class="img_forecast_box_logo" src=${weatherIcon(value.daily.weather_code[index])}>
             </div>
 
+            <p class="mode-forecast">${weather_mode(value.daily.weather_code[index])}</p>
+
             <h3>${value.daily.temperature_2m_max[index]}°C</h3>
 
             <p>${value.daily.temperature_2m_min[index]}°C</p>
@@ -185,7 +193,7 @@ function auto_text_up (data) {
     const img_val = document.querySelector('.logo-up');
     const mode_val = document.querySelector('.mode-value');
 
-    temp_val.innerText = data.temp;
+    temp_val.innerText = `${data.temp} °C`;
     mode_val.innerText = `${weather_mode(data.weatherCode)}`;
     img_val.src = `${weatherIcon(data.weatherCode)}`;
 
@@ -288,3 +296,50 @@ function weather_mode (code) {
             return "Unknown Weather";
     }
 }
+
+function hourly_data (data) {
+
+    const box_print = document.querySelector(".hourly-cont");
+    box_print.innerHTML = ""
+
+    for (let i = 0; i < 24; i++) {
+
+        const hour =
+            i === 0
+                ? "Now"
+                : new Date(data.hourly.time[i]).toLocaleTimeString([], {
+                    hour: "numeric",
+                    hour12: true
+          });
+
+        const card = document.createElement("div");
+        card.classList.add("hourly-box");
+
+        card.innerHTML = `
+            <h3>${hour}</h3>
+            <img src="${weatherIcon(data.hourly.weather_code[i])}" class="photo-hourly">
+            <h4>${Math.round(data.hourly.temperature_2m[i])}°C</h4>
+        `;
+
+        box_print.appendChild(card);
+    }
+
+}
+
+const leftBtn = document.querySelector(".lefta");
+const rightBtn = document.querySelector(".righta");
+const cont = document.querySelector(".hourly-cont");
+
+leftBtn.addEventListener("click", () => {
+    cont.scrollBy({
+        left: -400,
+        behavior: "smooth"
+    });
+});
+
+rightBtn.addEventListener("click", () => {
+    cont.scrollBy({
+        left: 400,
+        behavior: "smooth"
+    });
+});
