@@ -4,6 +4,8 @@ function getWeather(lat, lon) {
 
     fetch(url)
         .then(function(response){
+            content.classList.add("loading");
+            
             return response.json();
         })
         .then(function(data){
@@ -21,9 +23,14 @@ function getWeather(lat, lon) {
             const data_print = hourly_data(data);
 
             hourly_data_print(data_print);
+        })
+        .finally(() => {
+            content.classList.remove("loading");
         });
 
 }
+
+const content = document.querySelector(".content")
 
 const search_bar = document.querySelector('#input_text_city');
 
@@ -87,6 +94,9 @@ const sunset_time = document.querySelector('.sunset-time');
 const visibility_range = document.getElementById('visibility-range');
 const dew_point_meter = document.querySelector('.dew-point-time');
 const cloud_cover = document.querySelector('.cloud-time');
+const gust_speed = document.querySelector('.gust-time');
+const rain_prob = document.querySelector('.prob-time');
+const suntime = document.querySelector('.dura-time');
 
 
 function weather_extract(data) {
@@ -99,7 +109,10 @@ function weather_extract(data) {
         sunset: data.daily.sunset[0],
         cloud: data.current.cloud_cover,
         uv: data.daily.uv_index_max[0],
-        dewPoint: data.hourly.dew_point_2m[0]
+        dewPoint: data.hourly.dew_point_2m[0],
+        windGust: data.daily.wind_gusts_10m_max[0],
+        rainProb: data.daily.precipitation_probability_max[0],
+        sunTime: data.daily.sunshine_duration[0]
     };
 }
 
@@ -109,7 +122,9 @@ function output_data(parent) {
     wind_text.innerHTML = `${parent.wind} km/h`;
     cloud_cover.innerHTML = `${parent.cloud} %`;
     dew_point_meter.innerHTML = `${parent.dewPoint} °C`;
-    uxindex_text.innerHTML = parent.uv;
+    uxindex_text.innerHTML = `${parent.uv}`;
+    gust_speed.innerHTML = `${parent.windGust}`;
+    rain_prob.innerHTML = `${parent.rainProb}`;
 
 
     const visibility = (parent.visibility / 1000).toFixed(1);
@@ -127,6 +142,13 @@ function output_data(parent) {
         hour: "2-digit",
         minute: "2-digit"
     });
+
+    const totalSeconds = parent.sunTime;
+
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+    suntime.innerHTML = `${hours}h ${minutes}m`;
 }
 
 function weatherIcon(code) {
