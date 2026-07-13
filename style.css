@@ -7,6 +7,7 @@
 body{
     display:flex;
     min-height:100vh;
+    font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .search-bar{
@@ -198,6 +199,7 @@ header {
 .auto-loca {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 8px 0 4px 0;
 }
 
@@ -296,15 +298,26 @@ header {
     border-top:1px solid #E2E8F0;
 }
 
+.js-auto-info {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .forecast-box {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 30px;
-    gap: 20px;
+    gap: 40px;
     flex-direction: column;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
+}
+
+.forecast-box > h3 {
+    font-size: 26px;
 }
 
 .detail-down {
@@ -329,11 +342,20 @@ header {
     font-weight: 500;
     padding: auto;
     gap: 25px;
+    
+}
+
+.text-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .logo-up {
-    height: 150px;
-    width: 150px;
+    height: 200px;
+    width: 200px;
 }
 
 .menu-btn {
@@ -343,6 +365,15 @@ header {
     border: none;
     color: white;
     display: none;
+}
+
+.js-auto-info {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    gap: 20px;
+    margin: 30px;
 }
 
 .weather-current-city {

@@ -17,13 +17,18 @@ function getWeather(lat, lon) {
             const deta = auto_data_text(data);
 
             auto_text_up(deta);
+
         });
 
 }
 
+const search_bar = document.querySelector('#input_text_city');
+
 const searchBtn = document.querySelector(".search-st");
 
 searchBtn.addEventListener("click", order);
+
+search_bar.addEventListener("keydown", enterfun);
 
 function order(){
 
@@ -53,9 +58,20 @@ function order(){
 
         });
 
+        update_city(city);
+
 }
 
-const search_bar = document.querySelector('#input_text_city');
+function enterfun (event) {
+
+    if (event.key === "Enter") {
+        order();
+        search_bar.value = "";
+    }
+
+    
+}
+
 const humidity_text = document.querySelector('.humidity-js');
 const wind_text = document.querySelector('.wind-js');
 const pressure_text = document.querySelector('.pressure-js');
@@ -82,16 +98,16 @@ function weather_extract(data) {
 }
 
 function output_data(parent) {
-    humidity_text.innerHTML = parent.humidity;
-    pressure_text.innerHTML = parent.pressure;
-    wind_text.innerHTML = parent.wind;
-    cloud_cover.innerHTML = parent.cloud;
-    dew_point_meter.innerHTML = parent.dewPoint;
+    humidity_text.innerHTML = `${parent.humidity} %`;
+    pressure_text.innerHTML = `${parent.pressure} hPa`;
+    wind_text.innerHTML = `${parent.wind} km/h`;
+    cloud_cover.innerHTML = `${parent.cloud} %`;
+    dew_point_meter.innerHTML = `${parent.dewPoint} °C`;
     uxindex_text.innerHTML = parent.uv;
 
 
     const visibility = (parent.visibility / 1000).toFixed(1);
-    visibility_range.innerText = visibility;
+    visibility_range.innerText = `${visibility} Km`;
 
     const sunrise = new Date(parent.sunrise);
     const sunset = new Date(parent.sunset);
@@ -165,8 +181,110 @@ function auto_data_text (edit) {
 
 function auto_text_up (data) {
     const text_edit = document.querySelector('.weather-current-city');
-    text_edit.innerHTML = `
-        <img class="logo-up" src=${weatherIcon(data.weatherCode)}>
-        <h1 class-"temp">${data.temp} °C</h1>
-    `
+    const temp_val = document.querySelector('.temp-value');
+    const img_val = document.querySelector('.logo-up');
+    const mode_val = document.querySelector('.mode-value');
+
+    temp_val.innerText = data.temp;
+    mode_val.innerText = `${weather_mode(data.weatherCode)}`;
+    img_val.src = `${weatherIcon(data.weatherCode)}`;
+
+}
+
+function update_city (city) {
+    const city_val = document.querySelectorAll('.city-value');
+    city_val.forEach(val => {
+        val.innerText = city;
+    })
+}
+
+function weather_mode (code) {
+    switch (code) {
+        case 0:
+            return "Clear Sky";
+
+        case 1:
+            return "Mainly Clear";
+
+        case 2:
+            return "Partly Cloudy";
+
+        case 3:
+            return "Overcast";
+
+        case 45:
+            return "Fog";
+
+        case 48:
+            return "Depositing Rime Fog";
+
+        case 51:
+            return "Light Drizzle";
+
+        case 53:
+            return "Moderate Drizzle";
+
+        case 55:
+            return "Dense Drizzle";
+
+        case 56:
+            return "Light Freezing Drizzle";
+
+        case 57:
+            return "Dense Freezing Drizzle";
+
+        case 61:
+            return "Slight Rain";
+
+        case 63:
+            return "Moderate Rain";
+
+        case 65:
+            return "Heavy Rain";
+
+        case 66:
+            return "Light Freezing Rain";
+
+        case 67:
+            return "Heavy Freezing Rain";
+
+        case 71:
+            return "Light Snow";
+
+        case 73:
+            return "Moderate Snow";
+
+        case 75:
+            return "Heavy Snow";
+
+        case 77:
+            return "Snow Grains";
+
+        case 80:
+            return "Light Rain Showers";
+
+        case 81:
+            return "Moderate Rain Showers";
+
+        case 82:
+            return "Violent Rain Showers";
+
+        case 85:
+            return "Light Snow Showers";
+
+        case 86:
+            return "Heavy Snow Showers";
+
+        case 95:
+            return "Thunderstorm";
+
+        case 96:
+            return "Thunderstorm with Light Hail";
+
+        case 99:
+            return "Thunderstorm with Heavy Hail";
+
+        default:
+            return "Unknown Weather";
+    }
 }

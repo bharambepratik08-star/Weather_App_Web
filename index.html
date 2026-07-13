@@ -6,6 +6,7 @@
     <title>Weather App</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <aside>
@@ -41,7 +42,7 @@
         <div class="local-city">
             <div class="city-name">
                 <i class="fa-solid fa-location-dot"></i>
-                <p class="city">Nashik, India</p>
+                <p class="city-value"></p>
             </div>
             <div class="auto-loca">
                 <p class="auto-loca">Auto locate</p>
@@ -74,17 +75,22 @@
         <main>
             <div class="city-plus-type">
                 <div class="weather-current-city">
-
+                    <img class="logo-up" src="">
+                    <div class="js-auto-info">
+                        <h1 class="temp city-value"></h1>
+                        <h1 class="temp temp-value"></h1>
+                        <h2 class="temp mode-value"></h2>
+                    </div>
                 </div>
                 <div class="define-current-city">
                     <div class="humidity define-box">
                         <div class="logoo">
                             <i class="fa-solid fa-droplet"></i>
                         </div>
-                        <div class="text-humiity">
+                        <div class="text-humiity text-box">
                             <p>Humidity</p>
                             <p class="humidity-js">
-
+                                
                             </p>
                         </div>
                     </div>
@@ -92,7 +98,7 @@
                         <div class="logoo">
                             <i class="fa-solid fa-wind"></i>
                         </div>
-                        <div class="text-wind">
+                        <div class="text-wind text-box">
                             <p>Wind</p>
                             <p class="wind-js">
 
@@ -103,7 +109,7 @@
                         <div class="logoo">
                             <i class="fa-solid fa-gauge"></i>
                         </div>
-                        <div class="text-pressure">
+                        <div class="text-pressure text-box">
                             <p>Pressure</p>
                             <p class="pressure-js">
 
@@ -114,7 +120,7 @@
                         <div class="logoo">
                             <i class="fa-solid fa-sun"></i>
                         </div>
-                        <div class="text-ux-index">
+                        <div class="text-ux-index text-box">
                             <p>UX Index</p>
                             <p class="uxindex-js">
 
