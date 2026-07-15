@@ -18,6 +18,30 @@ body{
     pointer-events: none;
 }
 
+.weather-current-city.sunny{
+    background: linear-gradient(135deg,#FFD54F,#FF9800);
+}
+
+.weather-current-city.partly-cloudy{
+    background: linear-gradient(135deg,#64B5F6,#E3F2FD);
+}
+
+.weather-current-city.cloudy{
+    background: linear-gradient(135deg,#78909C,#CFD8DC);
+}
+
+.weather-current-city.rain{
+    background: linear-gradient(135deg,#1565C0,#0D47A1);
+}
+
+.weather-current-city.snow{
+    background: linear-gradient(135deg,#E3F2FD,#FFFFFF);
+}
+
+.weather-current-city.storm{
+    background: linear-gradient(135deg,#263238,#000000);
+}
+
 .search-bar{
     width:60%;
     height:56px;

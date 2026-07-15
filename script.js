@@ -1,6 +1,6 @@
 function getWeather(lat, lon) {
 
-    let url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,sunrise,sunset,sunshine_duration,uv_index_max,temperature_2m_max,apparent_temperature_max,temperature_2m_min,apparent_temperature_min,daylight_duration,uv_index_clear_sky_max,rain_sum,showers_sum,snowfall_sum,precipitation_sum,precipitation_probability_max,et0_fao_evapotranspiration,wind_direction_10m_dominant,wind_gusts_10m_max,wind_speed_10m_max,shortwave_radiation_sum&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,weather_code,pressure_msl,surface_pressure,cloud_cover,visibility,wind_speed_10m,wind_gusts_10m,temperature_80m,snowfall&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&timezone=auto`;
+    let url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=surface_pressure_mean,relative_humidity_2m_mean,weather_code,sunrise,sunset,sunshine_duration,uv_index_max,temperature_2m_max,apparent_temperature_max,temperature_2m_min,apparent_temperature_min,daylight_duration,uv_index_clear_sky_max,rain_sum,showers_sum,snowfall_sum,precipitation_sum,precipitation_probability_max,et0_fao_evapotranspiration,wind_direction_10m_dominant,wind_gusts_10m_max,wind_speed_10m_max,shortwave_radiation_sum&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,weather_code,pressure_msl,surface_pressure,cloud_cover,visibility,wind_speed_10m,wind_gusts_10m,temperature_80m,snowfall&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&timezone=auto`;
 
     fetch(url)
         .then(function(response){
@@ -22,9 +22,19 @@ function getWeather(lat, lon) {
 
             auto_text_up(deta);
 
-            const data_print = hourly_data(data);
+            hourly_data(data);
 
-            hourly_data_print(data_print);
+            selected_forecast_print_text (data);
+
+            selected_forecast_day_info (data)
+
+            const theme = weatherTheme (data.current.weather_code);
+
+            document.querySelector(".weather-current-city").className = `weather-current-city ${theme}`;
+
+            const forecast_data = data_extract_index (data);
+
+            print_js_forecast_detail (forecast_data)
         })
         .finally(() => {
             content.classList.remove("loading");
@@ -126,7 +136,7 @@ function output_data(parent) {
     dew_point_meter.innerHTML = `${parent.dewPoint} °C`;
     uxindex_text.innerHTML = `${parent.uv}`;
     gust_speed.innerHTML = `${parent.windGust}`;
-    rain_prob.innerHTML = `${parent.rainProb}`;
+    rain_prob.innerHTML = `${parent.rainProb} %`;
 
 
     const visibility = (parent.visibility / 1000).toFixed(1);
@@ -319,6 +329,32 @@ function weather_mode (code) {
         default:
             return "Unknown Weather";
     }
+}
+
+function weatherTheme(code) {
+
+    if (code === 0 || code === 1)
+        return "sunny";
+
+    if (code === 2)
+        return "partly-cloudy";
+
+    if (code === 3)
+        return "cloudy";
+
+    if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82))
+        return "rain";
+
+    if (code >= 71 && code <= 86)
+        return "snow";
+
+    if (code >= 95)
+        return "storm";
+
+    if (code === 45 || code === 48)
+        return "fog";
+
+    return "default";
 }
 
 function hourly_data (data) {
