@@ -34,7 +34,11 @@ function getWeather(lat, lon) {
 
             const forecast_data = data_extract_index (data);
 
-            print_js_forecast_detail (forecast_data)
+            print_js_forecast_detail (forecast_data);
+
+            charts (data);
+
+            data_on_click_button(data);
         })
         .finally(() => {
             content.classList.remove("loading");

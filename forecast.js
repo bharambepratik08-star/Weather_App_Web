@@ -65,9 +65,9 @@ const rain_proba = document.querySelector('.rain-chances');
 const wind_speedo = document.querySelector('.wind-speed');
 const humidity_js = document.querySelector('.humidity-fore');
 const sunrise_js = document.querySelector('.sunrise-js');
-const sunset_js = document.querySelector('.sunset');
+const sunset_js = document.querySelector('.sunset-js');
 const uvindex_js = document.querySelector('.uvindex-js');
-const pressure_js = document.querySelector('.pressure-js')
+const pressure_js = document.querySelector('.pressures')
 
 function data_extract_index (data) {
         return {
@@ -104,3 +104,166 @@ function print_js_forecast_detail (parent) {
     uvindex_js.innerHTML = `${parent.uv}`
     pressure_js.innerHTML = `${parent.pressureS}`
 }
+const buttons = document.querySelectorAll(".chartBtn");
+
+buttons.forEach(button => {
+    button.addEventListener("click", () => {
+
+        // Remove active from every button
+        buttons.forEach(btn => btn.classList.remove("active"));
+
+        // Add active to clicked button
+        button.classList.add("active");
+    });
+});
+
+const tempBtn = document.querySelector('.tempBtn');
+const rainBtn = document.querySelector('.rainBtn');
+const windBtn = document.querySelector('.windBtn');
+const humidityBtn = document.querySelector('.humidityBtn');
+const pressureBtn = document.querySelector('.pressureBtn');
+
+let myChart;
+
+function charts (value) {
+
+    if(myChart){
+        myChart.destroy();
+    }
+
+
+    const labels = value.daily.time.map(day =>
+        new Date(day).toLocaleDateString("en-US",{
+            weekday:"short"
+        })
+    );
+
+    const temperature = value.daily.temperature_2m_max;
+
+    const ctx = document.getElementById("charts-cal");
+
+    Chart.register(ChartDataLabels);
+
+    myChart = new Chart(ctx,{        
+        type:"line",
+
+        data:{
+            labels:labels,
+
+            datasets:[{
+                data:temperature,
+                borderColor:"#3b82f6",
+                backgroundColor:"rgba(59,130,246,.15)",
+                fill:true,
+                tension:0.45,
+                borderWidth:4,
+
+                pointRadius:5,
+                pointHoverRadius:7,
+                pointBackgroundColor:"#fff",
+                pointBorderColor:"#3b82f6",
+                pointBorderWidth:2,
+
+                datalabels:{
+                    align:"top",
+                    anchor:"end",
+                    color:"#111827",
+
+                    formatter:(value)=>{
+                        return value + "°";
+                    },
+
+                    font:{
+                        size:12,
+                        weight:"bold"
+                    }
+                }
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true
+                }
+            },
+
+            elements: {
+                line: {
+                    tension: 0.45
+                }
+            },
+
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    display: true,
+
+                    ticks: {
+                        callback: function(value) {
+                            return value + "°";
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+function updateChart(data, label, color) {
+    myChart.data.datasets[0].data = data;
+    myChart.data.datasets[0].label = label;
+    myChart.data.datasets[0].borderColor = color;
+    myChart.update();
+}
+
+function data_on_click_button(value){
+
+    buttons.forEach(button=>{
+
+        button.onclick = () => {
+
+            buttons.forEach(btn=>btn.classList.remove("active"));
+            button.classList.add("active");
+
+            const type = button.dataset.chart;
+
+            switch(type){
+
+                case "temperature":
+                    updateChart(value.daily.temperature_2m_max,"Temperature","#3b82f6");
+                    break;
+
+                case "rain":
+                    updateChart(value.daily.precipitation_probability_max,"Rain","#2563eb");
+                    break;
+
+                case "wind":
+                    updateChart(value.daily.wind_speed_10m_max,"Wind","#10b981");
+                    break;
+
+                case "humidity":
+                    updateChart(value.daily.relative_humidity_2m_mean,"Humidity","#8b5cf6");
+                    break;
+
+                case "pressure":
+                    updateChart(value.daily.surface_pressure_mean,"Pressure","#ef4444");
+                    break;
+            }
+
+        };
+
+    });
+
+}
+
