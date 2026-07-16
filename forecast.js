@@ -32,9 +32,22 @@ function forecast_main_card_edit(value) {
     });
 }
 
-function selected_forecast_print_text (enter) {
+const image_forecast = document.querySelector('.image-weather-mood');
+const text_forecast_temp = document.querySelector('.temp-high');
+const text_forecast_mood = document.querySelector('.temp-mood');
+const buttonss = document.querySelectorAll(".forecast-box-m");
 
-    const date = new Date(enter.daily.time[0]);
+function selected_forecast_day_info(data) {
+
+    image_forecast.src = weatherIcon(data.daily.weather_code[0]);
+
+    text_forecast_temp.innerHTML =
+        `${data.daily.temperature_2m_max[0]}°C`;
+
+    text_forecast_mood.innerHTML =
+        weather_mode(data.daily.weather_code[0]);
+
+    const date = new Date(data.daily.time[0]);
 
     const formattedDate = date.toLocaleDateString("en-US", {
         weekday: "long",
@@ -46,17 +59,76 @@ function selected_forecast_print_text (enter) {
 
     print_js.innerHTML = `${formattedDate}`;
 
-}
+    const sunrise = new Date(data.daily.sunrise[0]);
 
-const image_forecast = document.querySelector('.image-weather-mood');
-const text_forecast_temp = document.querySelector('.temp-high');
-const text_forecast_mood = document.querySelector('.temp-mood');
+    const sunset = new Date(data.daily.sunset[0]);
 
-function selected_forecast_day_info (data) {
+    sunrise_js.innerHTML = sunrise.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
 
-    image_forecast.setAttribute("src", `${weatherIcon(data.daily.weather_code[0])}`)
-    text_forecast_temp.innerHTML = `${data.daily.temperature_2m_max[0]}`
-    text_forecast_mood.innerHTML = `${weather_mode(data.daily.weather_code[0])}`
+    sunset_js.innerHTML = sunset.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+    feels_like_print.innerHTML = `${data.daily.apparent_temperature_max[0]}`;
+    rain_proba.innerHTML = `${data.daily.precipitation_probability_max[0]}`;
+    wind_speedo.innerHTML = `${data.daily.wind_speed_10m_max[0]}`;
+    humidity_js.innerHTML = `${data.daily.relative_humidity_2m_mean[0]}`;
+    uvindex_js.innerHTML = `${data.daily.uv_index_max[0]}`
+    pressure_js.innerHTML = `${data.daily.surface_pressure_mean[0]}`
+
+    buttonss.forEach((button, index) => {
+
+        button.addEventListener("click", () => {
+
+            image_forecast.src = weatherIcon(data.daily.weather_code[index]);
+
+            text_forecast_temp.innerHTML =
+                `${data.daily.temperature_2m_max[index]}°C`;
+
+            text_forecast_mood.innerHTML =
+                weather_mode(data.daily.weather_code[index]);
+            
+
+            const date = new Date(data.daily.time[index]);
+
+            const formattedDate = date.toLocaleDateString("en-US", {
+                weekday: "long",
+                month: "long",
+                day: "numeric"
+            });
+
+            const print_js = document.querySelector('.print-js')
+
+            print_js.innerHTML = `${formattedDate}`;
+
+            const sunrise = new Date(data.daily.sunrise[index]);
+
+            const sunset = new Date(data.daily.sunset[index]);
+
+            sunrise_js.innerHTML = sunrise.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+
+            sunset_js.innerHTML = sunset.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+
+            feels_like_print.innerHTML = `${data.daily.apparent_temperature_max[index]}`;
+            rain_proba.innerHTML = `${data.daily.precipitation_probability_max[index]}`;
+            wind_speedo.innerHTML = `${data.daily.wind_speed_10m_max[index]}`;
+            humidity_js.innerHTML = `${data.daily.relative_humidity_2m_mean[index]}`;
+            uvindex_js.innerHTML = `${data.daily.uv_index_max[index]}`
+            pressure_js.innerHTML = `${data.daily.surface_pressure_mean[index]}`
+
+                });
+
+            });
 
 }
 
@@ -69,50 +141,14 @@ const sunset_js = document.querySelector('.sunset-js');
 const uvindex_js = document.querySelector('.uvindex-js');
 const pressure_js = document.querySelector('.pressures')
 
-function data_extract_index (data) {
-        return {
-        humidity: data.daily.relative_humidity_2m_mean[0],
-        wind: data.daily.wind_speed_10m_max[0],
-        sunrise: data.daily.sunrise[0],
-        sunset: data.daily.sunset[0],
-        uv: data.daily.uv_index_max[0],
-        rainProb: data.daily.precipitation_probability_max[0],
-        feelsLike: data.daily.apparent_temperature_max[0],
-        pressureS: data.daily.surface_pressure_mean[0]
-        };
-}
 
-function print_js_forecast_detail (parent) {
-
-    const sunrise = new Date(parent.sunrise);
-    const sunset = new Date(parent.sunset);
-
-    sunrise_js.innerHTML = sunrise.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-    });
-
-    sunset_js.innerHTML = sunset.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit"
-    });
-
-    feels_like_print.innerHTML = `${parent.feelsLike}`;
-    rain_proba.innerHTML = `${parent.rainProb}`;
-    wind_speedo.innerHTML = `${parent.wind}`;
-    humidity_js.innerHTML = `${parent.humidity}`;
-    uvindex_js.innerHTML = `${parent.uv}`
-    pressure_js.innerHTML = `${parent.pressureS}`
-}
 const buttons = document.querySelectorAll(".chartBtn");
 
 buttons.forEach(button => {
     button.addEventListener("click", () => {
 
-        // Remove active from every button
         buttons.forEach(btn => btn.classList.remove("active"));
 
-        // Add active to clicked button
         button.classList.add("active");
     });
 });
@@ -267,3 +303,11 @@ function data_on_click_button(value){
 
 }
 
+buttonss.forEach(button => {
+    button.addEventListener("click", () => {
+
+        buttonss.forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+    });
+});

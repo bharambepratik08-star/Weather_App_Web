@@ -15,7 +15,7 @@
             <button class="weather-logo">
                 <h1>Weather.</h1>
             </button>
-            <button class="overview aside-btn">
+            <button class="overview-btn aside-btn">
                 <i class="fa-solid fa-house"></i>
                 <h3>Overview</h3>
             </button>
@@ -23,19 +23,19 @@
                 <i class="fa-regular fa-calendar"></i>
                 <h3>Forecast</h3>
             </button>
-            <button class="map aside-btn">
+            <button class="map-btn aside-btn">
                 <i class="fa-solid fa-book-open"></i>
                 <h3>Map</h3>
             </button>
-            <button class="alerts aside-btn">
+            <button class="alerts-btn aside-btn">
                 <i class="fa-solid fa-bell"></i>
                 <h3>Alerts</h3>
             </button>
-            <button class="air-quality aside-btn">
+            <button class="air-quality-btn aside-btn">
                 <i class="fa-solid fa-location-crosshairs"></i>
                 <h3>Air Quality</h3>
             </button>
-            <button class="setting aside-btn">
+            <button class="setting-btn aside-btn">
                 <i class="fa-solid fa-gear"></i>
                 <h3>Setting</h3>
             </button>
@@ -73,7 +73,7 @@
                 </div>
             </div>
         </header>
-        <main class="ovreview">
+        <main class="overview">
             <div class="city-plus-type">
                 <div class="weather-current-city">
                     <img class="logo-up" src="">
@@ -223,23 +223,23 @@
             </div>
 
         </main>
-        <main>
+        <main class="forecast-main-page">
             <div class="forecast-main-div">
                 <h2>7-day Forecast</h2>
                 <div class="forecast-main">
-                    <button class="forecast-today-m forecast-box-m">
+                    <button class="forecast-today-m forecast-box-m active" data-chart="one">
                     </button>
-                    <button class="forecast-tmr-m forecast-box-m">
+                    <button class="forecast-tmr-m forecast-box-m" data-chart="two">
                     </button>
-                    <button class="forecast-three-m forecast-box-m">
+                    <button class="forecast-three-m forecast-box-m" data-chart="three">
                     </button>
-                    <button class="forecast-four-m forecast-box-m">
+                    <button class="forecast-four-m forecast-box-m" data-chart="four">
                     </button>
-                    <button class="forecast-five-m forecast-box-m">
+                    <button class="forecast-five-m forecast-box-m" data-chart="five">
                     </button>
-                    <button class="forecast-six-m forecast-box-m">
+                    <button class="forecast-six-m forecast-box-m" data-chart="six">
                     </button>
-                    <button class="forecast-seven-m forecast-box-m">
+                    <button class="forecast-seven-m forecast-box-m" data-chart="seven">
                     </button>
                 </div>
             </div>
@@ -284,38 +284,65 @@
                         </div>
                         <div class="common-forecast-detail">
                             <i class="fa-solid fa-sun"></i>
-                            <div class="info"></div>
+                            <div class="info">
                                 <p>Sunrise</p>
                                 <h2 class="sunrise-js"></h2>
                             </div>
                         </div>
-                        <div class="common-forecast-detail ">
-                            <i class="fa-regular fa-sun"></i>
+                        <div class="common-forecast-detail">
+                            <i class="fa-solid fa-sun"></i>
                             <div class="info">
                                 <p>Sunset</p>
                                 <h2 class="sunset-js"></h2>
                             </div>
                         </div>
                         <div class="common-forecast-detail">
-                            <i class="fa-regular fa-sun"></i>
+                            <i class="fa-solid fa-sun"></i>
                             <div class="info">
                                 <p>Uv Index</p>
                                 <h2 class="uvindex-js"></h2>
                             </div>
                         </div>
                         <div class="common-forecast-detail">
-                            <i class="fa-regular fa-sun"></i>
+                            <i class="fa-solid fa-sun"></i>
                             <div class="info">
                                 <p>Pressure</p>
-                                <h2 class="pressure-js"></h2>
+                                <h2 class="pressures"></h2>
                             </div>
-                        </div>
-                    </div>
+                        </div>  
+                    </div>        
+                </div>
+            </div>
+            <div class="charts-temp-more">
+                <div class="button-chart">
+                    <button class="tempBtn chartBtn active" data-chart="temperature">Temperature</button>
+                    <button class="rainBtn chartBtn" data-chart="rain">Rain</button>
+                    <button class="windBtn chartBtn" data-chart="wind">Wind</button>
+                    <button class="humidityBtn chartBtn" data-chart="humidity">Humidity</button>
+                    <button class="pressureBtn chartBtn" data-chart="pressure">Pressure</button>
+                </div>
+                <div class="weather-chart">
+                    <canvas id="charts-cal"></canvas>
                 </div>
             </div>
         </main>
+        <main class="map-main-page">
+
+        </main>
+        <main class="alerts-main-page">
+
+        </main>
+        <main class="air-quality-page">
+
+        </main>
+        <main class="setting-main-page">
+
+        </main>
     </div>
     <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <script src="forecast.js"></script>
+    <script src="buttons.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-.ovreview {
+.deview {
     display: none;
     visibility: hidden;
     opacity: 0;
@@ -35,6 +35,13 @@
 
 .forecast-box-m > p {
     font-size: 16px;
+}
+
+.forecast-box-m.active {
+    transform: scale(1.05);
+    transition: 0.5s;
+    background: #00e1ff;
+    box-shadow:0 12px 25px rgba(0, 0, 0, 0.315);
 }
 
 .forecast-box-m {

@@ -24,17 +24,11 @@ function getWeather(lat, lon) {
 
             hourly_data(data);
 
-            selected_forecast_print_text (data);
-
             selected_forecast_day_info (data)
 
             const theme = weatherTheme (data.current.weather_code);
 
             document.querySelector(".weather-current-city").className = `weather-current-city ${theme}`;
-
-            const forecast_data = data_extract_index (data);
-
-            print_js_forecast_detail (forecast_data);
 
             charts (data);
 
@@ -392,7 +386,7 @@ function hourly_data (data) {
 
 const leftBtn = document.querySelector(".lefta");
 const rightBtn = document.querySelector(".righta");
-const cont = document.querySelector(".hourly-cont");
+const cont = document.querySelector(".shourly-cont");
 
 leftBtn.addEventListener("click", () => {
     cont.scrollBy({
