@@ -73,9 +73,10 @@ function order(){
 
             const lat = data[0].lat;
             const lon = data[0].lon;
+            const cityName = data[0].name;
 
             getWeather(lat, lon);
-
+            updateMap(lat,lon,cityName);
         });
 
         update_city(city);
@@ -386,7 +387,7 @@ function hourly_data (data) {
 
 const leftBtn = document.querySelector(".lefta");
 const rightBtn = document.querySelector(".righta");
-const cont = document.querySelector(".shourly-cont");
+const cont = document.querySelector(".hourly-cont");
 
 leftBtn.addEventListener("click", () => {
     cont.scrollBy({
