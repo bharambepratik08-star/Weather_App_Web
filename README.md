@@ -46,17 +46,14 @@ A modern and responsive Weather Dashboard built using **HTML**, **CSS**, and **V
 ```
 Weather_App_Web/
 │
-├── css/
-│   └── style.css
+├── style.css
 │
-├── js/
-│   ├── script.js
-│   ├── charts.js
-│   └── weather.js
+│
+├── script.js
+│
 │
 ├── svg/
-│   ├── weather icons
-│   └── ui icons
+│
 │
 ├── index.html
 └── README.md
