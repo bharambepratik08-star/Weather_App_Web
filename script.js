@@ -363,14 +363,12 @@ function hourly_data (data) {
 
     for (let i = 0; i < 24; i++) {
 
-        const hour =
-            i === 0
-                ? "Now"
-                : new Date(data.hourly.time[i]).toLocaleTimeString([], {
-                    hour: "numeric",
-                    hour12: true
-          });
+        const hour = new Date(data.hourly.time[i]).toLocaleTimeString([], {
+                        hour: "numeric",
+                        hour12: true
+                    });
 
+                    
         const card = document.createElement("div");
         card.classList.add("hourly-box");
 
