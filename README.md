@@ -6,18 +6,12 @@ A modern and responsive Weather Dashboard built using **HTML**, **CSS**, and **V
 
 ## 📸 Preview
 
-> Add screenshots of your project here.
-
-| Desktop |
-|----------|
-| ![Desktop Screenshot](images/preview.png) |
-
----
+![alt text](image.png)
+![alt text](image-1.png)
 
 ## ✨ Features
 
 - 🔍 Search weather by city
-- 📍 Auto-detect current location
 - 🌡️ Current temperature and weather condition
 - ⏰ 24-Hour weather forecast
 - 📅 7-Day weather forecast
