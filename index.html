@@ -8,49 +8,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="forecast.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 </head>
 <body>
-    <aside>
-        <div class="btn-aside">
-            <button class="weather-logo">
-                <h1>Weather.</h1>
-            </button>
-            <button class="overview-btn aside-btn">
-                <i class="fa-solid fa-house"></i>
-                <h3>Overview</h3>
-            </button>
-            <button class="forecast-btn aside-btn">
-                <i class="fa-regular fa-calendar"></i>
-                <h3>Forecast</h3>
-            </button>
-            <button class="map-btn aside-btn">
-                <i class="fa-solid fa-book-open"></i>
-                <h3>Map</h3>
-            </button>
-            <button class="alerts-btn aside-btn">
-                <i class="fa-solid fa-bell"></i>
-                <h3>Alerts</h3>
-            </button>
-            <button class="air-quality-btn aside-btn">
-                <i class="fa-solid fa-location-crosshairs"></i>
-                <h3>Air Quality</h3>
-            </button>
-            <button class="setting-btn aside-btn">
-                <i class="fa-solid fa-gear"></i>
-                <h3>Setting</h3>
-            </button>
-        </div>
-        <div class="local-city">
-            <div class="city-name">
-                <i class="fa-solid fa-location-dot"></i>
-                <p class="city-value"></p>
-            </div>
-            <div class="auto-loca">
-                <p class="auto-loca">Auto locate</p>
-                <i class="fa-solid fa-location-crosshairs"></i>
-            </div>
-        </div>
-    </aside>
     <div class="content">
         <header>
             <button class="menu-btn">
@@ -204,7 +166,7 @@
                     </div>
                 </div>
             </div>
-            <div class="forecast-div">
+            <!-- <div class="forecast-div">
                 <div class="forecast-text">
                         <h2>5-day Forecast</h2>
                     </div>
@@ -220,7 +182,7 @@
                     <div class="forecast-five forecast-box">
                     </div>
                 </div>
-            </div>
+            </div> -->
 
         </main>
         <main class="forecast-main-page">
@@ -255,56 +217,56 @@
                     </div>
                     <div class="selected-day-forecast-two">
                         <div class="common-forecast-detail ">
-                            <i class="fa-solid fa-temperature-high"></i>
+                            <img src="svg/feelslike.svg" alt="" height="40px" width="40px">
                             <div class="info">
                                 <p>Feels like</p>
                                 <h2 class="feels-like"></h2>
                             </div>
                         </div>
                         <div class="common-forecast-detail">
-                            <i class="fa-regular fa-umbrella"></i>
+                            <img src="svg/umbrella.svg" alt="" height="40px" width="40px">
                             <div class="info">
                                 <p>Rain Chance</p>
                                 <h2 class="rain-chances"></h2>
                             </div>
                         </div>
                         <div class="common-forecast-detail">
-                            <i class="fa-solid fa-wind"></i>
+                            <img src="svg/gust.svg" alt="" height="40px" width="40px">
                             <div class="info">
                                 <p>Wind</p>
                                 <h2 class="wind-speed"></h2>
                             </div>
                         </div>
                         <div class="common-forecast-detail">
-                            <i class="fa-solid fa-droplet"></i>
+                            <img src="svg/drop.svg" alt="" height="40px" width="40px">
                             <div class="info">
                                 <p>Humidity</p>
                                 <h2 class="humidity-fore"></h2>
                             </div>
                         </div>
                         <div class="common-forecast-detail">
-                            <i class="fa-solid fa-sun"></i>
+                            <img src="svg/sunriset.svg" alt="" height="40px" width="40px">
                             <div class="info">
                                 <p>Sunrise</p>
                                 <h2 class="sunrise-js"></h2>
                             </div>
                         </div>
                         <div class="common-forecast-detail">
-                            <i class="fa-solid fa-sun"></i>
+                            <img src="svg/sunriset.svg" alt="" height="40px" width="40px">
                             <div class="info">
                                 <p>Sunset</p>
                                 <h2 class="sunset-js"></h2>
                             </div>
                         </div>
                         <div class="common-forecast-detail">
-                            <i class="fa-solid fa-sun"></i>
+                            <img src="svg/sun.svg" alt="" height="40px" width="40px">
                             <div class="info">
                                 <p>Uv Index</p>
                                 <h2 class="uvindex-js"></h2>
                             </div>
                         </div>
                         <div class="common-forecast-detail">
-                            <i class="fa-solid fa-sun"></i>
+                            <img src="svg/pressure.svg" alt="" height="40px" width="40px">
                             <div class="info">
                                 <p>Pressure</p>
                                 <h2 class="pressures"></h2>
@@ -326,23 +288,17 @@
                 </div>
             </div>
         </main>
-        <main class="map-main-page">
-
-        </main>
-        <main class="alerts-main-page">
-
-        </main>
-        <main class="air-quality-page">
-
-        </main>
-        <main class="setting-main-page">
-
-        </main>
     </div>
-    <script src="script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+
+    <script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
+
+    <script src="script.js" defer></script>
     <script src="forecast.js"></script>
     <script src="buttons.js"></script>
+    <script src="maps.js"></script>
 </body>
 </html>

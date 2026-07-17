@@ -1,9 +1,3 @@
-.deview {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
-}
-
 .forecast-main-div {
     width: 100%;
     display: flex;

@@ -135,6 +135,10 @@ main{
     height: 100%;
 }
 
+.overview {
+    padding: 24px 24px 0 24px;
+}
+
 header {
     padding: 12px 24px;
     height: max-content;

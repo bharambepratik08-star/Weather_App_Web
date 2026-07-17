@@ -73,12 +73,12 @@ function selected_forecast_day_info(data) {
         minute: "2-digit"
     });
 
-    feels_like_print.innerHTML = `${data.daily.apparent_temperature_max[0]}`;
-    rain_proba.innerHTML = `${data.daily.precipitation_probability_max[0]}`;
-    wind_speedo.innerHTML = `${data.daily.wind_speed_10m_max[0]}`;
-    humidity_js.innerHTML = `${data.daily.relative_humidity_2m_mean[0]}`;
+    feels_like_print.innerHTML = `${data.daily.apparent_temperature_max[0]} °C`;
+    rain_proba.innerHTML = `${data.daily.precipitation_probability_max[0]} %`;
+    wind_speedo.innerHTML = `${data.daily.wind_speed_10m_max[0]} km/h`;
+    humidity_js.innerHTML = `${data.daily.relative_humidity_2m_mean[0]} %`;
     uvindex_js.innerHTML = `${data.daily.uv_index_max[0]}`
-    pressure_js.innerHTML = `${data.daily.surface_pressure_mean[0]}`
+    pressure_js.innerHTML = `${data.daily.surface_pressure_mean[0]} hPa`
 
     buttonss.forEach((button, index) => {
 
@@ -119,12 +119,12 @@ function selected_forecast_day_info(data) {
                 minute: "2-digit"
             });
 
-            feels_like_print.innerHTML = `${data.daily.apparent_temperature_max[index]}`;
-            rain_proba.innerHTML = `${data.daily.precipitation_probability_max[index]}`;
-            wind_speedo.innerHTML = `${data.daily.wind_speed_10m_max[index]}`;
-            humidity_js.innerHTML = `${data.daily.relative_humidity_2m_mean[index]}`;
+            feels_like_print.innerHTML = `${data.daily.apparent_temperature_max[index]} °C`;
+            rain_proba.innerHTML = `${data.daily.precipitation_probability_max[index]} %`;
+            wind_speedo.innerHTML = `${data.daily.wind_speed_10m_max[index]} km/h`;
+            humidity_js.innerHTML = `${data.daily.relative_humidity_2m_mean[index]} %`;
             uvindex_js.innerHTML = `${data.daily.uv_index_max[index]}`
-            pressure_js.innerHTML = `${data.daily.surface_pressure_mean[index]}`
+            pressure_js.innerHTML = `${data.daily.surface_pressure_mean[index]} hPa`
 
                 });
 
@@ -206,7 +206,7 @@ function charts (value) {
                     color:"#111827",
 
                     formatter:(value)=>{
-                        return value + "°";
+                        return Math.round(value) + curretUnit;
                     },
 
                     font:{
@@ -247,7 +247,7 @@ function charts (value) {
 
                     ticks: {
                         callback: function(value) {
-                            return value + "°";
+                            return Math.round(value) + curretUnit;
                         }
                     }
                 }
@@ -256,7 +256,11 @@ function charts (value) {
     });
 }
 
-function updateChart(data, label, color) {
+let curretUnit = "°";
+
+function updateChart(data, label, color, current) {
+    curretUnit = current;
+
     myChart.data.datasets[0].data = data;
     myChart.data.datasets[0].label = label;
     myChart.data.datasets[0].borderColor = color;
@@ -277,23 +281,23 @@ function data_on_click_button(value){
             switch(type){
 
                 case "temperature":
-                    updateChart(value.daily.temperature_2m_max,"Temperature","#3b82f6");
+                    updateChart(value.daily.temperature_2m_max,"Temperature","#3b82f6", "°");
                     break;
 
                 case "rain":
-                    updateChart(value.daily.precipitation_probability_max,"Rain","#2563eb");
+                    updateChart(value.daily.precipitation_probability_max,"Rain","#2563eb", "%");
                     break;
 
                 case "wind":
-                    updateChart(value.daily.wind_speed_10m_max,"Wind","#10b981");
+                    updateChart(value.daily.wind_speed_10m_max,"Wind","#10b981", "km/h");
                     break;
 
                 case "humidity":
-                    updateChart(value.daily.relative_humidity_2m_mean,"Humidity","#8b5cf6");
+                    updateChart(value.daily.relative_humidity_2m_mean,"Humidity","#8b5cf6", "%");
                     break;
 
                 case "pressure":
-                    updateChart(value.daily.surface_pressure_mean,"Pressure","#ef4444");
+                    updateChart(value.daily.surface_pressure_mean,"Pressure","#ef4444", "hPa");
                     break;
             }
 
