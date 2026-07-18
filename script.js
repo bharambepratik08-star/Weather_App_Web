@@ -1,3 +1,5 @@
+// getWeather --> Weather API and giving other functions the data 
+
 function getWeather(lat, lon) {
 
     let url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=surface_pressure_mean,relative_humidity_2m_mean,weather_code,sunrise,sunset,sunshine_duration,uv_index_max,temperature_2m_max,apparent_temperature_max,temperature_2m_min,apparent_temperature_min,daylight_duration,uv_index_clear_sky_max,rain_sum,showers_sum,snowfall_sum,precipitation_sum,precipitation_probability_max,et0_fao_evapotranspiration,wind_direction_10m_dominant,wind_gusts_10m_max,wind_speed_10m_max,shortwave_radiation_sum&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation_probability,precipitation,rain,weather_code,pressure_msl,surface_pressure,cloud_cover,visibility,wind_speed_10m,wind_gusts_10m,temperature_80m,snowfall&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weather_code,cloud_cover,pressure_msl,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&timezone=auto`;
@@ -13,8 +15,6 @@ function getWeather(lat, lon) {
             const extracted = weather_extract(data);
 
             output_data(extracted);
-
-            forecast_card_edit(data);
 
             forecast_main_card_edit(data);
 
@@ -50,6 +50,8 @@ searchBtn.addEventListener("click", order);
 
 search_bar.addEventListener("keydown", enterfun);
 
+// order --> Gives weather API the latitude and longitude for a place 
+
 function order(){
 
     const city = search_bar.value.trim();
@@ -76,13 +78,14 @@ function order(){
             const cityName = data[0].name;
 
             getWeather(lat, lon);
-            updateMap(lat,lon,cityName);
         });
 
         update_city(city);
         
 
 }
+
+// enterfun --> To change the placeholder of search bar after first search
 
 function enterfun (event) {
 
@@ -109,6 +112,7 @@ const gust_speed = document.querySelector('.gust-time');
 const rain_prob = document.querySelector('.prob-time');
 const suntime = document.querySelector('.dura-time');
 
+// weather_extract --> To extract data ffrom weather API and provide further 
 
 function weather_extract(data) {
     return {
@@ -126,6 +130,8 @@ function weather_extract(data) {
         sunTime: data.daily.sunshine_duration[0]
     };
 }
+
+// output_data --> To print data for todays detail and highlights
 
 function output_data(parent) {
     humidity_text.innerHTML = `${parent.humidity} %`;
@@ -162,6 +168,8 @@ function output_data(parent) {
     suntime.innerHTML = `${hours}h ${minutes}m`;
 }
 
+// weatherIcon --> To change the weather icon according to weather code 
+
 function weatherIcon(code) {
     switch (code) {
         case 0:
@@ -179,39 +187,7 @@ function weatherIcon(code) {
     }
 } 
 
-function forecast_card_edit(value) {
-    let forecast = [];
-
-    for (let i = 0; i < 5; i++) {
-        forecast.push({
-            minTemp: value.daily.temperature_2m_min[i],
-            maxTemp: value.daily.temperature_2m_max[i],
-            weatherCode: value.daily.weather_code[i],
-            dateCode: value.daily.time[i]
-        });
-    }
-
-    const boxes = document.querySelectorAll(".forecast-box");
-
-    boxes.forEach((card, index) => {
-        const day = new Date(forecast[index].dateCode)
-        .toLocaleDateString("en-US", {
-            weekday: "short"
-        });
-        card.innerHTML = `
-            <h2>${day}</h2>
-            <div class="icon">
-                <img class="img_forecast_box_logo" src=${weatherIcon(value.daily.weather_code[index])}>
-            </div>
-
-            <p class="mode-forecast">${weather_mode(value.daily.weather_code[index])}</p>
-
-            <h3>${value.daily.temperature_2m_max[index]}°C</h3>
-
-            <p>${value.daily.temperature_2m_min[index]}°C</p>
-        `;
-    });
-}
+// auto_data_text --> To take the value from API 
 
 function auto_data_text (edit) {
     return {
@@ -219,6 +195,8 @@ function auto_data_text (edit) {
         weatherCode: edit.daily.weather_code[0],
     }
 }
+
+// auto_text_up --> To print the value taken from auto_data_text
 
 function auto_text_up (data) {
     const text_edit = document.querySelector('.weather-current-city');
@@ -232,12 +210,16 @@ function auto_text_up (data) {
 
 }
 
+// update_city --> To update city according to the search
+
 function update_city (city) {
     const city_val = document.querySelectorAll('.city-value');
     city_val.forEach(val => {
         val.innerText = city;
     })
 }
+
+// weather_mode --> To decide current weather according to weather code 
 
 function weather_mode (code) {
     switch (code) {
@@ -330,6 +312,8 @@ function weather_mode (code) {
     }
 }
 
+// weatherTheme --> Helps to set value for background of upper box 
+
 function weatherTheme(code) {
 
     if (code === 0 || code === 1)
@@ -355,6 +339,8 @@ function weatherTheme(code) {
 
     return "default";
 }
+
+// hourly_data --> To take data from API and print in hourly forecast cards
 
 function hourly_data (data) {
 
@@ -387,6 +373,8 @@ const leftBtn = document.querySelector(".lefta");
 const rightBtn = document.querySelector(".righta");
 const cont = document.querySelector(".hourly-cont");
 
+// leftBtn & rightBtn --> To make the hourly forecast scrollable by buttons 
+
 leftBtn.addEventListener("click", () => {
     cont.scrollBy({
         left: -400,
@@ -400,6 +388,8 @@ rightBtn.addEventListener("click", () => {
         behavior: "smooth"
     });
 });
+
+// forecast_main_card_edit --> To take data from API provide further and print 
 
 function forecast_main_card_edit(value) {
     let forecast = [];
@@ -439,6 +429,8 @@ const image_forecast = document.querySelector('.image-weather-mood');
 const text_forecast_temp = document.querySelector('.temp-high');
 const text_forecast_mood = document.querySelector('.temp-mood');
 const buttonss = document.querySelectorAll(".forecast-box-m");
+
+// selected_forecast_day_info --> To output the selected day's forecast or else default to today's
 
 function selected_forecast_day_info(data) {
 
@@ -564,6 +556,8 @@ const pressureBtn = document.querySelector('.pressureBtn');
 
 let myChart;
 
+// charts --> Creates the chart 
+
 function charts (value) {
 
     if(myChart){
@@ -661,6 +655,8 @@ function charts (value) {
 
 let curretUnit = "°";
 
+// updateChart --> Updates the chart according to the selected feild 
+
 function updateChart(data, label, color, current) {
     curretUnit = current;
 
@@ -669,6 +665,8 @@ function updateChart(data, label, color, current) {
     myChart.data.datasets[0].borderColor = color;
     myChart.update();
 }
+
+// data_on_click_button --> To give data to updateCharts according to selected feild
 
 function data_on_click_button(value){
 
